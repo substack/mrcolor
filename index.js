@@ -13,8 +13,8 @@ var mr = module.exports = function () {
         colors.push(mr.fromIndex(i));
         colors.push(mr.fromIndex(j));
         
-        ranges.push([ i + dx / 2, j ]);
-        ranges.push([ j + dx / 2, max ]);
+        ranges.push([ Math.floor(i + dx / 2), j ]);
+        ranges.push([ Math.floor(j + dx / 2), max ]);
     }
     
     return (function next () {
@@ -54,4 +54,19 @@ mr.fromIndex = function (i) {
             return convert.hsl2xyz([ i, 100, 50 ])
         }
     };
+};
+
+mr.take = function (n) {
+    if (n <= 0) return [];
+    
+    var res = [];
+    var c = { next : mr };
+    
+    for (var i = 0; i < n; i++) {
+        var c_ = c;
+        c = c.next();
+        res.push(c);
+    }
+    
+    return res;
 };
