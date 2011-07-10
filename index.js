@@ -33,8 +33,10 @@ var mr = module.exports = function () {
         
         return mr.fromHSL(
             angle,
-            75 + Math.random() * 25 * (1 - 1 / Math.sqrt(num)),
-            25 + Math.random() * 50
+            100 - Math.min(80, 1 / Math.sqrt(1 + Math.floor(num / 12)))
+                * Math.random(),
+            50 + Math.min(80, (Math.floor(num / 6) * 20))
+                * (Math.random() - 0.5)
         );
     };
 };
