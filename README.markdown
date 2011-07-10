@@ -9,6 +9,41 @@ different the more colors you load.
 The hue is deterministic but the saturation and luminosity vary increasingly
 randomly the more colors are generated.
 
+examples
+========
+
+example/take.js
+---------------
+
+````javascript
+var mr = require('mrcolor');
+mr.take(18).forEach(function (color) {
+    console.log('rgb(' + color.rgb().join(',') + ')');
+});
+````
+
+output:
+
+    $ node example/take.js
+    rgb(254,1,1)
+    rgb(255,255,0)
+    rgb(0,255,0)
+    rgb(1,254,254)
+    rgb(0,0,255)
+    rgb(255,47,255)
+    rgb(226,113,0)
+    rgb(214,54,0)
+    rgb(109,217,1)
+    rgb(0,243,121)
+    rgb(4,129,255)
+    rgb(84,1,167)
+    rgb(198,0,99)
+    rgb(255,206,62)
+    rgb(112,254,65)
+    rgb(0,181,135)
+    rgb(0,39,154)
+    rgb(213,89,255)
+
 methods
 =======
 
