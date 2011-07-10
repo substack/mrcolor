@@ -30,27 +30,35 @@ var mr = module.exports = function () {
         
         num ++;
         last = [angle].concat(last).slice(0,4);
-        return mr.fromAngle(angle);
+        
+        return mr.fromHSL(
+            angle,
+            75 + Math.random() * 25 * (1 - 1 / Math.sqrt(num)),
+            25 + Math.random() * 50
+        );
     };
 };
 
-mr.fromAngle = function (i) {
+mr.fromHSL = function (h, s, l) {
+    if (!s) s = 100;
+    if (!l) l = 50;
+    var hsl = [ h, s, l ];
+    
     return {
-        index : i,
         rgb : function () {
-            return convert.hsl2rgb([ i, 100, 50 ])
+            return convert.hsl2rgb(hsl);
         },
         hsl : function () {
-            return [ i, 100, 50 ];
+            return hsl;
         },
         hsv : function () {
-            return convert.hsl2hsv([ i, 100, 50 ])
+            return convert.hsl2hsv(hsl)
         },
         cmyk : function () {
-            return convert.hsl2cmyk([ i, 100, 50 ])
+            return convert.hsl2cmyk(hsl)
         },
         xyz : function () {
-            return convert.hsl2xyz([ i, 100, 50 ])
+            return convert.hsl2xyz(hsl)
         }
     };
 };
