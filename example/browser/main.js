@@ -2,11 +2,11 @@ var mr = require('mrcolor');
 var $ = require('jquery-browserify');
 
 $(window).ready(function () {
-    var color = mr();
+    var next = mr();
     
     $('#clicky').click(function () {
+        var color = next();
         var rgb = 'rgb(' + color.rgb().join(',') + ')';
-        color = color.next();
         
         $('<div>')
             .css({

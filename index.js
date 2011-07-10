@@ -1,41 +1,31 @@
 var convert = require('color-convert');
 
 var mr = module.exports = function () {
-    var ranges = [];
-    var colors = [];
+    var angle = 0;
+    var step = 60;
     
-    function nextTwo (min, max) {
-        var dx = (max - min) / 2;
-        
-        var i = min;
-        var j = Math.floor(dx + min);
-        
-        colors.push(mr.fromIndex(i));
-        colors.push(mr.fromIndex(j));
-        
-        ranges.push([ Math.floor(i + dx / 2), j ]);
-        ranges.push([ Math.floor(j + dx / 2), max ]);
-    }
+    var used = {};
     
-    return (function next () {
-        if (colors.length) {
-            var c = colors.shift();
-            c.next = next;
-            return c;
+    return function next () {
+        if (angle + step > 360) {
+            step /= 2;
+            angle = step;
         }
-        else if (ranges.length) {
-            var r = ranges.shift();
-            nextTwo.apply(null, r);
+        
+        var a = Math.floor(angle);
+        angle += step;
+        
+        if (used[a]) {
             return next();
         }
         else {
-            nextTwo(0, 360);
-            return next();
+            used[a] = true;
+            return mr.fromAngle(a);
         }
-    })();
+    };
 };
 
-mr.fromIndex = function (i) {
+mr.fromAngle = function (i) {
     return {
         index : i,
         rgb : function () {
@@ -60,12 +50,10 @@ mr.take = function (n) {
     if (n <= 0) return [];
     
     var res = [];
-    var c = { next : mr };
+    var next = mr();
     
     for (var i = 0; i < n; i++) {
-        var c_ = c;
-        c = c.next();
-        res.push(c);
+        res.push(next());
     }
     
     return res;
