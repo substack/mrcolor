@@ -1,53 +1,36 @@
 var convert = require('color-convert');
 
 var mr = module.exports = function () {
-    var angle = 0;
-    var bi = mr.biforcate(0, 60);
-    var offset = bi();
+    var used = [];
+    var num = 0;
+    var last = [];
     
     return function next () {
-        if (angle + 60 >= 360) {
-            offset = bi();
-            angle = offset;
-        }
-        
-        var a = Math.floor(angle);
-        angle += 60;
-        
-        return mr.fromAngle(a);
-    };
-};
-
-mr.biforcate = function (m, n) {
-    var ranges = [];
-    var indexes = [];
-    
-    function next (min, max) {
-        var dx = (max - min) / 2;
-        
-        var i = min;
-        indexes.push(i);
-        
-        var j = Math.floor(dx + min);
-        indexes.push(j);
-        
-        ranges.push([ i + dx / 2, j ]);
-        ranges.push([ j + dx / 2, max ]);
-    }
-    next(m, n);
-    
-    return function result () {
-        if (indexes.length) {
-            return indexes.shift();
-        }
-        else if (ranges.length) {
-            var r = ranges.shift();
-            next.apply(null, r);
-            return indexes.shift();
+        var angle;
+        if (num < 6) {
+            angle = 60 * num;
+            used.push(angle);
+            if (num === 5) used.push(360);
         }
         else {
-            throw new Error('wtf');
+            var dxs = used.slice(1).map(function (u, i) {
+                return (u - used[i]) * last.every(function (x) {
+                    return Math.abs(u - x) > 60
+                        && Math.abs((u - 360) - x) > 60
+                    ;
+                });
+            });
+            var ix = dxs.indexOf(Math.max.apply(null, dxs));
+            
+            var x = used[ix];
+            var y = used[ix+1];
+            angle = Math.floor(x + (y - x) / 2);
+            used.splice(ix + 1, 0, angle);
         }
+        
+        num ++;
+        last = [angle].concat(last).slice(0,4);
+        return mr.fromAngle(angle);
     };
 };
 
