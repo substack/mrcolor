@@ -9,6 +9,8 @@ different the more colors you load.
 The hue is deterministic but the saturation and luminosity vary increasingly
 randomly the more colors are generated.
 
+![mrcolor browser example screenshot](https://github.com/substack/mrcolor/raw/master/example/browser/screenshot.png)
+
 examples
 ========
 
