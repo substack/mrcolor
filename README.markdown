@@ -72,3 +72,13 @@ Color objects have these methods:
 
 The return values are arrays with each of the color parameters.
 See [color-convert](https://github.com/harthur/color-convert) for more info.
+
+installation
+============
+
+With [npm](http://npmjs.org), just do:
+
+    npm install mrcolor
+
+This module also works with
+[browserify](https://github.com/substack/node-browserify).
