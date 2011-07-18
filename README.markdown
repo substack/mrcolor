@@ -3,6 +3,8 @@ Mr. Color
 
 I just want some colors, you know?
 
+![mr. color](http://substack.net/images/mrcolor.png)
+
 This module gives you some colors which are all different but they get less
 different the more colors you load.
 
