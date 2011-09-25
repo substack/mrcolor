@@ -3,7 +3,7 @@ Mr. Color
 
 I just want some colors, you know?
 
-![mr. color](http://imgur.com/iUQ6p)
+![mr. color](http://i.imgur.com/iUQ6p.png)
 
 This module gives you some colors which are all different but they get less
 different the more colors you load.
