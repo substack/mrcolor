@@ -1,6 +1,6 @@
 {
     "name" : "mrcolor",
-    "version" : "0.0.0",
+    "version" : "0.0.1",
     "description" : "Just give me some colors already!",
     "main" : "index.js",
     "directories" : {
@@ -21,7 +21,7 @@
     },
     "repository" : {
         "type" : "git",
-        "url" : "http://github.com/substack/node-mrcolor.git"
+        "url" : "http://github.com/substack/mrcolor.git"
     },
     "keywords" : [
         "color",
