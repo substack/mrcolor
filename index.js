@@ -5,7 +5,7 @@ var mr = module.exports = function () {
     var num = 0;
     var last = [];
     
-    return function next () {
+    function next () {
         var angle;
         if (num < 6) {
             angle = 60 * num;
@@ -39,6 +39,14 @@ var mr = module.exports = function () {
                 * (Math.random() - 0.5)
         );
     };
+    
+    next.reset = function () {
+        used = [];
+        num = 0;
+        last = [];
+    };
+    
+    return next;
 };
 
 mr.fromHSL = function (h, s, l) {
